@@ -30,12 +30,22 @@ function searchCity() {
 }
 
 function displayEvents(events = []){
-    if(events.length>0){
+    $('#column0').empty();
+    $('#column1').empty();
+    $('#column2').empty();
+
+    if(events.length > 0){
         for(i = 0; i < events.length; i++) {
-            console.log(events[i]);
+            
+            let eventCard = $(`<div id="eventCard-${i}">`).addClass('card m-2');
+            
+
+            $(`#column${i%3}`).append(eventCard);
         }
     }else{
         console.log('No events');
     }
 
 }
+
+
