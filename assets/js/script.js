@@ -30,6 +30,8 @@ function searchCity() {
 }
 
 function displayEvents(events = []){
+
+    //clears all event columns 
     $('#column0').empty();
     $('#column1').empty();
     $('#column2').empty();
@@ -37,9 +39,14 @@ function displayEvents(events = []){
     if(events.length > 0){
         for(i = 0; i < events.length; i++) {
             
-            let eventCard = $(`<div id="eventCard-${i}">`).addClass('card m-2');
-            
+            //image url from ticket master
+            let eventImgUrl = events[i].images[1].url;
 
+
+            let eventCard = $(`<div id="eventCard-${i}">`).addClass('card m-2');
+           // let eventImage = 
+
+            //fills event columns left to right then top to bottom
             $(`#column${i%3}`).append(eventCard);
         }
     }else{
