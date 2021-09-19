@@ -2,7 +2,7 @@
 
 <html lang="en-us">
     <head>
-        <style rel="stylesheet" href="./assets/css/style.css" type="text/css"></style>
+        <link rel="stylesheet" href="assets/css/style.css" type="text/css"></link>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width" />
@@ -23,12 +23,12 @@
                    
                     <!-- Search Bar-->
                     <form class="d-flex col-2 col-lg-2 me-auto">
-                      <input type="search" class="form-control form-control-dark" placeholder="Location..." aria-label="Search">
+                      <input id="searchTerm" type="search" class="form-control form-control-dark" placeholder="Location..." aria-label="Search">
                     </form>
             
                     <!-- Search Button -->
                     <div class="text-end">
-                      <button type="button" class="btn btn-outline-light me-2">Search</button>
+                      <button type="button" class="btn btn-outline-light me-2" onclick="searchCity()">Search</button>
                     </div>
                   </div>
             </div>
@@ -48,25 +48,19 @@
                 </select>
             </div>
         </div>
+        
         <div class="container">
-            <div class="row" i>
-                <div class="col-3" id="">
+            <div class="row">
+                <div class="col-4" id="column0">
                 </div>
-                <div class="col-3">
+                <div class="col-4" id="column1">
                 </div>
-                <div class="col-3">
+                <div class="col-4" id="column2">
                 </div>
             </div>
         </div>
 
-        <style>
-            body {
-          background-image: url('https://www.claypaky.it/media/news/images/clay_paky_saves_rock_and_roll_on_fall_out_boy.jpg');
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-size: cover;
-            }
-          </style>
-        <script src="./assets/js/script.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="assets/js/script.js"></script>
     </body>
 </html>
