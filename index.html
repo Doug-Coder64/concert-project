@@ -35,21 +35,34 @@
         </header>
         <div class="container-fluid m-3">
             <div class="row">
-                <select class="col-4" id="genre">
+                <select class="col-4 bg-dark" id="genre">
                 <!-- JS Loop genres -->
                 
                 </select>
-                <div class="col-4">
-                    <input></input>
-                    <input></input>
+                <div class="col-4 text-white">
+                    <div style='margin-top: px;'>
+ 
+                        <input type='text' class="form-control bg-dark text-white" id='datepicker' placeholder='MM/DD/YY' style='width: 300px;' >Start Date<br>
+                       
+                        <input type='text' class="form-control bg-dark text-white" id='datepicker2' placeholder='MM/DD/YY' style='width: 300px;' >End Date
+                        
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-outline-light" onclick="searchCity()">Search</button>
+                    </div>
+                    
+                       
                 </div>
-                <select label="price range"class="col-4">
+
+
+                <select label="price range" class="col-4 bg-dark">
                     <!-- price range -->
                 </select>
             </div>
         </div>
         
         <div class="container">
+            
             <div class="row">
                 <div class="col-4" id="column0">
                 </div>

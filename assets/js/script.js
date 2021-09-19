@@ -9,6 +9,8 @@ let latlong = "0,0";
 
 
 
+
+
 function searchCity() {
     //sets city from search term
     const city = document.querySelector('#searchTerm').value;
@@ -28,6 +30,8 @@ function searchCity() {
             console.log(error)
         });
 }
+
+
 
 function displayEvents(events = []){
 
@@ -56,25 +60,56 @@ function displayEvents(events = []){
             //event image element
             let eventImageEl = $(`<img id="eventImg-${i}">`).addClass('card-img-top');
             eventImageEl.attr('src', eventImgUrl);
+            
+
 
             //sub container for text on card
             let eventCardBody = $(`<div id="eventCardBody-${i}">`).addClass('card-body');
+            eventCardBody.text(events[i]._embedded.venues[0].name);
+            eventCardBody.text(events[i].dates.start.localDate);
+            
+            
+            
+
+            
             
             //event title element lists first artists name
             let eventTitle = $(`<h5 id="eventTitle-${i}">`).addClass('card-title');
             eventTitle.text(events[i]._embedded.attractions[0].name);
+            
+            
 
-            //
+            
 
             eventCardBody.append(eventTitle);
             eventCard.append(eventImageEl);
             eventCard.append(eventCardBody);
 
+            
+
             //fills event columns left to right then top to bottom i%3 always = 0, 1 or 2 depending on value of i
             $(`#column${i%3}`).append(eventCard);
+
+            
         }
     }else{
         console.log('No events');
     }
+
+
+    // $(document).ready(function(){
+ 
+    //     $('#datepicker').datepicker({
+    //      format: "mm-dd-yy",
+    //      startDate: '-1y -1m',
+    //      endDate: '+2m +10d'
+    //     });
+      
+    //     $('#datepicker2').datepicker({
+    //      format: "mm-dd-yy",
+    //      startDate: '-1m',
+    //      endDate: '+10d'
+    //     }); 
+    //   });
 
 }
