@@ -9,13 +9,13 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     </head>
     <body>
-        <header class="header p-3 bg-dark text-white">
+        <header class="header p-3 bg-black text-white">
             <div class="container-fluid">
                 <div class="d-flex flex-wrap">
                     
                     <!--Title-->
                     <h1 class="d-flex col-2 align-items-center text-white text-decoration-none">
-                        Concert Project
+                        Live Fest
                     </h1>
                     
                     <!--Space between title and search bar-->
@@ -23,16 +23,38 @@
                    
                     <!-- Search Bar-->
                     <form class="d-flex col-2 col-lg-2 me-auto">
-                      <input type="search" class="form-control form-control-dark" placeholder="Location..." aria-label="Search">
+                      <input type="search" class="form-control form-control-black" placeholder="Location..." aria-label="Search">
                     </form>
-            
-                    <!-- Search Button -->
-                    <div class="text-end">
-                      <button type="button" class="btn btn-outline-light me-2">Search</button>
-                    </div>
-                  </div>
-            </div>
-        </header>
+                    <form name="form1" id="form1" action="/action_page.php">
+                        Genre: <select name="genre" id="genre">
+                          <option value="" selected="selected">Select genre</option>
+                        </select>
+                        <br><br>
+                        Price Range: <select name="price range" id="price range">
+                          <!-- <option value="" selected="selected">Please select subject first</option> -->
+                        </select>
+                        <br><br>
+                        Beginning Date: <select name="beginning date" id="beginning date">
+                          <!-- <option value="" selected="selected">Please select topic first</option> -->
+                        </select>
+                        <br><br>
+                        <br><br>
+                        End Date: <select name="end date" id="end date">
+                          <!-- <option value="" selected="selected">Please select topic first</option> -->
+                        </select>
+                        <br><br>
+                        <input type="submit" value="Submit">
+                      </form>
+          
+
+        <style>
+            body {
+          background-image: url('https://www.claypaky.it/media/news/images/clay_paky_saves_rock_and_roll_on_fall_out_boy.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            }
+          </style>
         <script src="./assets/js/script.js"></script>
     </body>
 </html>
