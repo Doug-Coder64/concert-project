@@ -39,14 +39,38 @@ function displayEvents(events = []){
     if(events.length > 0){
         for(i = 0; i < events.length; i++) {
             
-            //image url from ticket master
-            let eventImgUrl = events[i].images[1].url;
+            
+            //image url from ticket master picked from image array with a 16_9 aspect ratio and image height greater than 150
+            let imgArray = events[i].images;
+            let eventImgUrl = "";
+            for(j = 0; j < imgArray.length; j++){
+                if(imgArray[j].ratio === '16_9' && imgArray[j].height > 150){
+                    eventImgUrl = imgArray[j].url;
+                    break;
+                }
+            }
 
-
+            //main card container
             let eventCard = $(`<div id="eventCard-${i}">`).addClass('card m-2');
-           // let eventImage = 
+            
+            //event image element
+            let eventImageEl = $(`<img id="eventImg-${i}">`).addClass('card-img-top');
+            eventImageEl.attr('src', eventImgUrl);
 
-            //fills event columns left to right then top to bottom
+            //sub container for text on card
+            let eventCardBody = $(`<div id="eventCardBody-${i}">`).addClass('card-body');
+            
+            //event title element lists first artists name
+            let eventTitle = $(`<h5 id="eventTitle-${i}">`).addClass('card-title');
+            eventTitle.text(events[i]._embedded.attractions[0].name);
+
+            //
+
+            eventCardBody.append(eventTitle);
+            eventCard.append(eventImageEl);
+            eventCard.append(eventCardBody);
+
+            //fills event columns left to right then top to bottom i%3 always = 0, 1 or 2 depending on value of i
             $(`#column${i%3}`).append(eventCard);
         }
     }else{
