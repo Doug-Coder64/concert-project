@@ -63,19 +63,23 @@ function displayEvents(events = []){
             
 
 
-            //sub container for text on card
-            let eventCardBody = $(`<div id="eventCardBody-${i}">`).addClass('card-body');
-            eventCardBody.text(events[i]._embedded.venues[0].name);
-            eventCardBody.text(events[i].dates.start.localDate);
-            
-            
-            
-
-            
-            
             //event title element lists first artists name
             let eventTitle = $(`<h5 id="eventTitle-${i}">`).addClass('card-title');
             eventTitle.text(events[i]._embedded.attractions[0].name);
+
+            //sub container for text on card
+            let eventCardBody = $(`<div id="eventCardBody-${i}">`).addClass('card-body');
+            eventCardBody.text(events[i]._embedded.venues[0].name);
+
+            let eventDate = $(`<div id="eventCardBody-${i}">`).addClass('card-body');
+            eventDate.text(events[i].dates.start.localDate);
+        
+
+
+            // let priceRange = $(`<div id="eventCardBody-${i}">`).addClass('card-body');
+            // priceRange.text$`${events[i].priceRanges.min} - $${events[i].priceRanges.max}'
+            
+            
             
             
 
@@ -84,6 +88,8 @@ function displayEvents(events = []){
             eventCardBody.append(eventTitle);
             eventCard.append(eventImageEl);
             eventCard.append(eventCardBody);
+            eventCardBody.append(eventDate);
+            eventCardBody.append(priceRange);
 
             
 
