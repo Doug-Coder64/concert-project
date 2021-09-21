@@ -1,79 +1,104 @@
 <!DOCTYPE html>
 
 <html lang="en-us">
-    <head>
-        <link rel="stylesheet" href="assets/css/style.css" type="text/css"></link>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
-        <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    </head>
-    <body>
-        <header class="header p-3 bg-dark text-white">
-            <div class="container-fluid">
-                <div class="d-flex flex-wrap">
-                    
-                    <!--Title-->
-                    <h1 class="d-flex col-2 align-items-center text-white text-decoration-none">
-                        Concert Project
-                    </h1>
-                    
-                    <!--Space between title and search bar-->
-                    <div class="d-flex col-7"></div>
-                   
-                    <!-- Search Bar-->
-                    <form class="d-flex col-2 col-lg-2 me-auto">
-                      <input id="searchTerm" type="search" class="form-control form-control-dark" placeholder="Location..." aria-label="Search">
-                    </form>
-            
-                    <!-- Search Button -->
-                    <div class="text-end">
-                      <button type="button" class="btn btn-outline-light me-2" onclick="searchCity()">Search</button>
-                    </div>
-                  </div>
-            </div>
-        </header>
-        <div class="container-fluid m-3">
-            <div class="row">
-                <select class="col-4 bg-dark" id="genre">
-                <!-- JS Loop genres -->
-                
-                </select>
-                <div class="col-4 text-white">
-                    <div style='margin-top: px;'>
- 
-                        <input type='text' class="form-control bg-dark text-white" id='datepicker' placeholder='MM/DD/YY' style='width: 300px;' >Start Date<br>
-                       
-                        <input type='text' class="form-control bg-dark text-white" id='datepicker2' placeholder='MM/DD/YY' style='width: 300px;' >End Date
-                        
-                    </div>
-                    <div>
-                        <button type="button" class="btn btn-outline-light" onclick="searchCity()">Search</button>
-                    </div>
-                    
-                       
-                </div>
 
+<head>
+    <style rel="stylesheet" href="./assets/css/style.css" type="text/css"></style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge" /> -->
+</head>
 
-                <select label="price range" class="col-4 bg-dark">
-                    <!-- price range -->
-                </select>
-            </div>
-        </div>
-        
-        <div class="container">
-            
-            <div class="row">
-                <div class="col-4" id="column0">
-                </div>
-                <div class="col-4" id="column1">
-                </div>
-                <div class="col-4" id="column2">
+<body>
+    <header class="header p-3 bg-black text-white">
+        <div class="container-fluid">
+            <div class="d-flex flex-wrap">
+
+                <!--Title-->
+                <h1 class="d-flex col-2 align-items-center text-white text-decoration-none">
+                    Live Fest
+                </h1>
+
+                <!--Space between title and search bar-->
+                <div class="d-flex col-7"></div>
+
+                <!-- Search Bar-->
+                <form class="d-flex col-2 col-lg-2 me-auto">
+                    <input type="search" class="form-control form-control-black" placeholder="Location..."
+                        aria-label="Search">
+                </form>
+
+                <!-- Search Button -->
+                <div class="text-end">
+                    <button type="button" class="btn btn-outline-light me-2">Search</button>
                 </div>
             </div>
         </div>
+    </header>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="assets/js/script.js"></script>
-    </body>
+    <div class="container-fluid m-3 row">
+
+            <div class="dropdown col-4">
+                <a class="btn btn-outline-light me-2 dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Dropdown link
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </div>
+
+        <!-- JS Loop genres -->
+        </select>
+        <div class="col-4 text-white">
+            <div style='margin-top: px;'>
+                <input type='text' class="form-control bg-dark text-white" id='datepicker' placeholder='MM/DD/YY'
+                    style='width: 300px;'>Start Date<br>
+                <input type='text' class="form-control bg-dark text-white" id='datepicker2' placeholder='MM/DD/YY'
+                    style='width: 300px;'>End Date
+            </div>
+            <div>
+                <button type="button" class="btn btn-outline-light" onclick="searchCity()">Search</button>
+            </div>
+        </div>
+        <div class="dropdown col-4 justify-content-md-center">
+            <a class="btn btn-outline-light me-2 dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown link
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-4" id="column0">
+            </div>
+            <div class="col-4" id="column1">
+            </div>
+            <div class="col-4" id="column2">
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="./assets/js/script.js"></script>
+</body>
+
 </html>
