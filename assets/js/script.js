@@ -2,13 +2,8 @@
 const ticketMaster = `https://app.ticketmaster.com/discovery/v2/events`;
 const ticketApiKey = `JSvaCBLEbfONlapKvWM5RjNslD0khaFy`;
 
-const weatherApi = `https://api.openWeatherMap.org`;
-const weatherApiKey = `f896ee9ece73d272be5c85b563ebb01b`;
 
 let latlong = "0,0";
-
-
-
 
 
 function searchCity() {
@@ -62,43 +57,30 @@ function displayEvents(events = []){
             eventImageEl.attr('src', eventImgUrl);
             
 
-
-            //event title element lists first artists name
-            let eventTitle = $(`<h5 id="eventTitle-${i}">`).addClass('card-title');
-            eventTitle.text(events[i]._embedded.attractions[0].name);
-
             //sub container for text on card
             let eventCardBody = $(`<div id="eventCardBody-${i}">`).addClass('card-body');
             eventCardBody.text(events[i]._embedded.venues[0].name);
 
-            let eventDate = $(`<div id="eventCardBody-${i}">`).addClass('card-body');
+            
+            /* Start Of eventCardBody Contents */
+            let eventTitle = $(`<h5 id="eventTitle-${i}">`).addClass('card-title');
+            eventTitle.text(events[i]._embedded.attractions[0].name);
+
+            let eventDate = $(`<div id="eventCardBody-${i}">`).addClass('card-text');
             eventDate.text(events[i].dates.start.localDate);
         
-            console.log(events[i]);
-
-            let priceRange = $(`<div id="eventCardBody-${i}">`).addClass('card-body');
+            let priceRange = $(`<div id="eventCardBody-${i}">`).addClass('card-text');
             if (events[i].priceRanges) {
              priceRange.text(`$${events[i].priceRanges[0].min} - $${events[i].priceRanges[0].max}`);
             }
             else {
                 priceRange.text(`price at gate`);
             }
+            /* End of eventCardBody Contents */
             
+            eventCardBody.append(eventTitle, eventDate, priceRange);
+            eventCard.append(eventImageEl, eventCardBody);            
             
-            
-            
-
-            
-            
-            eventCardBody.append(eventTitle);
-            eventCard.append(eventImageEl);
-            eventCard.append(eventCardBody);
-            eventCardBody.append(eventDate);
-            eventCardBody.append(priceRange);
-            
-
-            
-
             //fills event columns left to right then top to bottom i%3 always = 0, 1 or 2 depending on value of i
             $(`#column${i%3}`).append(eventCard);
 
