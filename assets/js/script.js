@@ -12,9 +12,11 @@ let latlong = "0,0";
 function searchCity() {
     //sets city from search term
     const city = document.querySelector('#searchTerm').value;
-   
+
+    let ticketUrl = `${ticketMaster}?apikey=${ticketApiKey}&city=${city}&locale=*&classificationName=music`;
     
-    fetch(`${ticketMaster}?apikey=${ticketApiKey}&city=${city}&locale=*&classificationName=music`)
+
+    fetch(ticketUrl)
         .then(function (res) {
             console.log(res);
             return res.json();
@@ -63,8 +65,8 @@ function displayEvents(events = []){
             //event title element lists first artists name
             let eventTitle = $(`<h5 id="eventTitle-${i}">`).addClass('card-title');
             eventTitle.text(events[i]._embedded.attractions[0].name);
-
-            //
+            
+            
 
             eventCardBody.append(eventTitle);
             eventCard.append(eventImageEl);
