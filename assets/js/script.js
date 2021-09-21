@@ -74,22 +74,28 @@ function displayEvents(events = []){
             let eventDate = $(`<div id="eventCardBody-${i}">`).addClass('card-body');
             eventDate.text(events[i].dates.start.localDate);
         
+            console.log(events[i]);
 
-
-            // let priceRange = $(`<div id="eventCardBody-${i}">`).addClass('card-body');
-            // priceRange.text$`${events[i].priceRanges.min} - $${events[i].priceRanges.max}'
+            let priceRange = $(`<div id="eventCardBody-${i}">`).addClass('card-body');
+            if (events[i].priceRanges) {
+             priceRange.text(`$${events[i].priceRanges[0].min} - $${events[i].priceRanges[0].max}`);
+            }
+            else {
+                priceRange.text(`price at gate`);
+            }
             
             
             
             
 
             
-
+            
             eventCardBody.append(eventTitle);
             eventCard.append(eventImageEl);
             eventCard.append(eventCardBody);
             eventCardBody.append(eventDate);
             eventCardBody.append(priceRange);
+            
 
             
 
