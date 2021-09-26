@@ -1,7 +1,7 @@
 //API information
 const ticketMaster = `https://app.ticketmaster.com/discovery/v2/events`;
 const ticketApiKey = `JSvaCBLEbfONlapKvWM5RjNslD0khaFy`;
-
+const googleAPI = 'AIzaSyDm-sEZEMtTC81g89Gx0Dn7Ie2Djc_1wog';
 
 let latlong = "0,0";
 
@@ -59,26 +59,36 @@ function displayEvents(events = []){
 
             //sub container for text on card
             let eventCardBody = $(`<div id="eventCardBody-${i}">`).addClass('card-body');
-            eventCardBody.text(events[i]._embedded.venues[0].name);
-
             
             /* Start Of eventCardBody Contents */
             let eventTitle = $(`<h5 id="eventTitle-${i}">`).addClass('card-title');
             eventTitle.text(events[i]._embedded.attractions[0].name);
 
+            let eventVenue = $(`<div id="eventVenue-${i}">`).addClass('card-text');
+            eventVenue.text(events[i]._embedded.venues[0].name);
+            
             let eventDate = $(`<div id="eventCardBody-${i}">`).addClass('card-text');
             eventDate.text(events[i].dates.start.localDate);
         
             let priceRange = $(`<div id="eventCardBody-${i}">`).addClass('card-text');
+            
+            //verifies there are prices to display
             if (events[i].priceRanges) {
              priceRange.text(`$${events[i].priceRanges[0].min} - $${events[i].priceRanges[0].max}`);
             }
             else {
                 priceRange.text(`price at gate`);
             }
+
+            let detailsButton = $(`<button type="button" id="${i}">Details</button>`).addClass('mt-3 card-text btn btn-dark');
+            detailsButton.text("More Details");
+            //detailsButton.attr("data-toggle", "modal");
+           // detailsButton.attr("data-target", "#eventModal");
+            detailsButton.click(function(e){eventDetails(this.id, events)});
+
             /* End of eventCardBody Contents */
             
-            eventCardBody.append(eventTitle, eventDate, priceRange);
+            eventCardBody.append(eventVenue, eventTitle, eventDate, priceRange, detailsButton);
             eventCard.append(eventImageEl, eventCardBody);            
             
             //fills event columns left to right then top to bottom i%3 always = 0, 1 or 2 depending on value of i
@@ -89,21 +99,36 @@ function displayEvents(events = []){
     }else{
         console.log('No events');
     }
+}
+
+function eventDetails(id, events){
+    let concert = events[id];
+    let venue = concert._embedded.venues[0]
+    let venueLocation = `${venue.location.latitude},${venue.location.longitude}`;
+    let modalTitle = $('#eventModalLabel').text(concert.name);
+    
+    let modalBody = $('#eventModalBody');
+    modalBody.empty();
+
+    let venueTitle = $("<h6>").addClass('h6');
+    venueTitle.text(venue.name);
+
+    let locationMap = $('<img>').addClass('img');
+    locationMap.addClass('m-2');
+
+    let venueAddressBox = $('<div>').text(`${venue.address.line1} ${venue.city.name}, ${venue.state.stateCode}, ${venue.postalCode}`);
+    venueAddressBox.addClass('m-2');
+
+    let parkingDetails = $('<div>').text(`PARKING INFO: ${venue.parkingDetail}`);
+    parkingDetails.addClass('m-2');
+    
+    if(venue.location){
+        locationMap.attr('src', `https://maps.googleapis.com/maps/api/staticmap?center=${venueLocation}&zoom=15&size=250x250&markers=color:blue%7C${venueLocation}&key=${googleAPI}`);
+        modalBody.append(venueTitle,locationMap, venueAddressBox, parkingDetails);
+    }
 
 
-    // $(document).ready(function(){
- 
-    //     $('#datepicker').datepicker({
-    //      format: "mm-dd-yy",
-    //      startDate: '-1y -1m',
-    //      endDate: '+2m +10d'
-    //     });
-      
-    //     $('#datepicker2').datepicker({
-    //      format: "mm-dd-yy",
-    //      startDate: '-1m',
-    //      endDate: '+10d'
-    //     }); 
-    //   });
+    
 
+    $('#eventModal').modal('show');
 }
