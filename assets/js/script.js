@@ -105,31 +105,43 @@ function eventDetails(id, events){
     let concert = events[id];
     let venue = concert._embedded.venues[0]
     let venueLocation = `${venue.location.latitude},${venue.location.longitude}`;
-    let modalTitle = $('#eventModalLabel').text(concert.name);
     
+    //sets Modal title to the Concerts name
+    $('#eventModalLabel').text(concert.name);
+    
+    //Empties Modal Body to later append details 
     let modalBody = $('#eventModalBody');
     modalBody.empty();
 
+    //Checks for Venue title and then adds it to H6 element
     let venueTitle = $("<h6>").addClass('h6');
-    venueTitle.text(venue.name);
+    if(venue.name){  
+        venueTitle.text(venue.name);
+    }
 
+    //Google Static Map API that pins the location of the venues location
     let locationMap = $('<img>').addClass('img');
     locationMap.addClass('m-2');
-
-    let venueAddressBox = $('<div>').text(`${venue.address.line1} ${venue.city.name}, ${venue.state.stateCode}, ${venue.postalCode}`);
-    venueAddressBox.addClass('m-2');
-
-    let parkingDetails = $('<div>').text(`${venue.parkingDetail}`);
-    parkingDetails.addClass('m-2 card-text');
-    
-    let venueLink = $(`<a href=${concert.url} target="_blank">`).text("Buy Tickets Now");
     if(venue.location){
         locationMap.attr('src', `https://maps.googleapis.com/maps/api/staticmap?center=${venueLocation}&zoom=15&size=250x250&markers=color:blue%7C${venueLocation}&key=${googleAPI}`);
         modalBody.append(venueTitle,locationMap, venueAddressBox, parkingDetails, venueLink);
     }
 
+    // Pulls multiple things from API call to fill Venue Address
+    let venueAddressBox = $('<div>').addClass('m-2');
+    if(venue.address.line1 && venue.city.name && venue.state.stateCode && venue.postalCode){
+        venueAddressBox.text(`${venue.address.line1} ${venue.city.name}, ${venue.state.stateCode}, ${venue.postalCode}`);
+    }
 
+    //Parking details for venue
+    let parkingDetails = $('<div>').addClass('m-2 card-text');
+    if(venue.parkingDetail){
+        parkingDetails.text(`${venue.parkingDetail}`);
+    }
     
+    // link for user to buy tickets
+    let venueLink = $(`<a href=${concert.url} target="_blank">`).text("Buy Tickets Now");
+     
 
     $('#eventModal').modal('show');
 }
