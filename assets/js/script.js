@@ -119,12 +119,13 @@ function eventDetails(id, events){
     let venueAddressBox = $('<div>').text(`${venue.address.line1} ${venue.city.name}, ${venue.state.stateCode}, ${venue.postalCode}`);
     venueAddressBox.addClass('m-2');
 
-    let parkingDetails = $('<div>').text(`PARKING INFO: ${venue.parkingDetail}`);
-    parkingDetails.addClass('m-2');
+    let parkingDetails = $('<div>').text(`${venue.parkingDetail}`);
+    parkingDetails.addClass('m-2 card-text');
     
+    let venueLink = $(`<a href=${concert.url} target="_blank">`).text("Buy Tickets Now");
     if(venue.location){
         locationMap.attr('src', `https://maps.googleapis.com/maps/api/staticmap?center=${venueLocation}&zoom=15&size=250x250&markers=color:blue%7C${venueLocation}&key=${googleAPI}`);
-        modalBody.append(venueTitle,locationMap, venueAddressBox, parkingDetails);
+        modalBody.append(venueTitle,locationMap, venueAddressBox, parkingDetails, venueLink);
     }
 
 
