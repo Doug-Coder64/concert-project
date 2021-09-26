@@ -9,8 +9,8 @@ let latlong = "0,0";
 function searchCity() {
     //sets city from search term
     const city = document.querySelector('#searchTerm').value;
-   
-    
+
+
     fetch(`${ticketMaster}?apikey=${ticketApiKey}&city=${city}&locale=*&classificationName=music`)
         .then(function (res) {
             console.log(res);
@@ -28,22 +28,24 @@ function searchCity() {
 
 
 
-function displayEvents(events = []){
+function displayEvents(events = []) {
 
     //clears all event columns 
     $('#column0').empty();
     $('#column1').empty();
     $('#column2').empty();
+    let genreArray = []    
 
-    if(events.length > 0){
-        for(i = 0; i < events.length; i++) {
-            
-            
+    if (events.length > 0) {
+        for (i = 0; i < events.length; i++) {
+            genreArray.push(events[i].classifications[0].genre.name)
+
+
             //image url from ticket master picked from image array with a 16_9 aspect ratio and image height greater than 150
             let imgArray = events[i].images;
             let eventImgUrl = "";
-            for(j = 0; j < imgArray.length; j++){
-                if(imgArray[j].ratio === '16_9' && imgArray[j].height > 150){
+            for (j = 0; j < imgArray.length; j++) {
+                if (imgArray[j].ratio === '16_9' && imgArray[j].height > 150) {
                     eventImgUrl = imgArray[j].url;
                     break;
                 }
@@ -51,15 +53,18 @@ function displayEvents(events = []){
 
             //main card container
             let eventCard = $(`<div id="eventCard-${i}">`).addClass('card m-2');
-            
+
             //event image element
             let eventImageEl = $(`<img id="eventImg-${i}">`).addClass('card-img-top');
             eventImageEl.attr('src', eventImgUrl);
-            
+
 
             //sub container for text on card
             let eventCardBody = $(`<div id="eventCardBody-${i}">`).addClass('card-body');
-            
+
+            eventCardBody.text(events[i]._embedded.venues[0].name);
+
+
             /* Start Of eventCardBody Contents */
             let eventTitle = $(`<h5 id="eventTitle-${i}">`).addClass('card-title');
             eventTitle.text(events[i]._embedded.attractions[0].name);
@@ -69,12 +74,12 @@ function displayEvents(events = []){
             
             let eventDate = $(`<div id="eventCardBody-${i}">`).addClass('card-text');
             eventDate.text(events[i].dates.start.localDate);
-        
+
             let priceRange = $(`<div id="eventCardBody-${i}">`).addClass('card-text');
             
             //verifies there are prices to display
             if (events[i].priceRanges) {
-             priceRange.text(`$${events[i].priceRanges[0].min} - $${events[i].priceRanges[0].max}`);
+                priceRange.text(`$${events[i].priceRanges[0].min} - $${events[i].priceRanges[0].max}`);
             }
             else {
                 priceRange.text(`price at gate`);
@@ -91,15 +96,28 @@ function displayEvents(events = []){
             eventCardBody.append(eventVenue, eventTitle, eventDate, priceRange, detailsButton);
             eventCard.append(eventImageEl, eventCardBody);            
             
-            //fills event columns left to right then top to bottom i%3 always = 0, 1 or 2 depending on value of i
-            $(`#column${i%3}`).append(eventCard);
 
-            
+            //fills event columns left to right then top to bottom i%3 always = 0, 1 or 2 depending on value of i
+            $(`#column${i % 3}`).append(eventCard);
+
+
         }
-    }else{
+    } else {
         console.log('No events');
     }
 }
+    console.log(genreArray);
+    let filteredGenres = genreArray.filter((item, index) => genreArray.indexOf(item) === index)
+    console.log(filteredGenres);
+
+    let genreEl = document.querySelector("#genreDropdown");
+    for (let i = 0; i < filteredGenres.length; i++) {
+        let genreDropdownEl = document.createElement("a");
+        genreDropdownEl.textContent= filteredGenres[i]
+        genreDropdownEl.classList.add("dropdown-item");
+        genreDropdownEl.setAttribute("href", "#");
+        genreEl.append(genreDropdownEl);
+    }
 
 function eventDetails(id, events){
     let concert = events[id];
@@ -126,6 +144,7 @@ function eventDetails(id, events){
         locationMap.attr('src', `https://maps.googleapis.com/maps/api/staticmap?center=${venueLocation}&zoom=15&size=250x250&markers=color:blue%7C${venueLocation}&key=${googleAPI}`);
         modalBody.append(venueTitle,locationMap, venueAddressBox, parkingDetails, venueLink);
     }
+
 
     // Pulls multiple things from API call to fill Venue Address
     let venueAddressBox = $('<div>').addClass('m-2');
