@@ -60,8 +60,9 @@
                 <input type='text' class="form-control bg-dark text-white" id='datePicker2' placeholder='MM/DD/YY'
                     style='width: 300px;'>End Date
             </div>
+
             <div>
-                <button type="button" class="btn btn-outline-light" onclick="searchCity()">Search</button>
+                <button type="button" class="btn btn-outline-light" onclick="searchDate()">Search</button>
             </div>
         </div>
         <div class="dropdown col-4 justify-content-md-center">
@@ -88,6 +89,7 @@
         </div>
     </div>
 
+
     <!-- Event Details Modal -->
     <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -105,23 +107,6 @@
         </div>
       </div>
     
-    <script> 
-        var array = [{id: "datePicker", date: "Mar 12 2012 10:00:00 AM"},
-                    {id: "datePicker2", date: "Mar 8 2012 08:00:00 AM"}];
-          
-        var el = document.getElementById("searchDate");
-      
-        function searchDate() {
-            array.sort(GFG_sortFunction);
-            el.innerHTML = JSON.stringify(array);
-        }
-          
-        function GFG_sortFunction(a, b) { 
-            var dateA = new Date(a.date).getTime();
-            var dateB = new Date(b.date).getTime();
-            return dateA > dateB ? 1 : -1; 
-        }; 
-    </script> 
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

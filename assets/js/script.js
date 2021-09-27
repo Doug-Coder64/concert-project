@@ -1,6 +1,9 @@
 //API information
 const ticketMaster = `https://app.ticketmaster.com/discovery/v2/events`;
 const ticketApiKey = `JSvaCBLEbfONlapKvWM5RjNslD0khaFy`;
+let eventResponse = []
+
+
 const googleAPI = 'AIzaSyDm-sEZEMtTC81g89Gx0Dn7Ie2Djc_1wog';
 
 let latlong = "0,0";
@@ -18,8 +21,8 @@ function searchCity() {
         })
         .then(function (body) {
             console.log('body', body);
-            const events = body._embedded.events;
-            displayEvents(events);
+            eventResponse = body._embedded.events;
+            displayEvents(eventResponse);
         })
         .catch(function (error) {
             console.log(error)
@@ -34,7 +37,7 @@ function displayEvents(events = []) {
     $('#column0').empty();
     $('#column1').empty();
     $('#column2').empty();
-    let genreArray = []    
+    let genreArray = []
 
     if (events.length > 0) {
         for (i = 0; i < events.length; i++) {
@@ -111,13 +114,66 @@ function displayEvents(events = []) {
     console.log(filteredGenres);
 
     let genreEl = document.querySelector("#genreDropdown");
+    function clearBox(genreEl)
+{
+    document.getElementById(genreEl).innerHTML = "";
+}
+//seems like there is no built in funciton's but in jquery 
+$(genreEl).empty();
+        // empty genreEl with javascript
     for (let i = 0; i < filteredGenres.length; i++) {
         let genreDropdownEl = document.createElement("a");
-        genreDropdownEl.textContent= filteredGenres[i]
+        genreDropdownEl.textContent = filteredGenres[i]
         genreDropdownEl.classList.add("dropdown-item");
         genreDropdownEl.setAttribute("href", "#");
         genreEl.append(genreDropdownEl);
     }
+}
+function searchDate() {
+    const startDate = new Date(document.querySelector('#datePicker').value);
+    console.log(startDate);
+
+    const endDate = new Date(document.querySelector('#datePicker2').value);
+    console.log(endDate);
+    console.log(eventResponse);
+    let resultEventData = eventResponse.filter(function (a) {
+        let eventDate = new Date(a.dates.start.dateTime)
+        console.log(eventDate);
+        // extract all date strings
+        console.log(eventDate >= startDate && eventDate <= endDate);
+        return eventDate >= startDate && eventDate <= endDate
+
+        return hitDateMatchExists;
+    });
+    console.log(resultEventData);
+    displayEvents(resultEventData)
+}
+
+
+    // function getDateRange(startDate, endDate) 
+    //     // Parse dd-mm-yyyy
+    //     let qParse = s => {
+    //       let [d, m, y] = s.split(/\D/);
+    //       return new Date(y, m-1, d);
+    //     };
+    //     // Format date as dd-mm-yyyy
+    //     let qFormat = d => {
+    //       let z = n => (n<10? '0' : '') + n;
+    //       return z(d.getDate())+'-'+z(d.getMonth()+1)+'-'+d.getFullYear();
+    //     }
+    //     // Setup for loop
+    //     let start  = qParse(startDate);
+    //     let end    = qParse(endDate);
+    //     let result = [];
+    //     // Loop from start to end, incrementing
+    //     // the start date and writing to result array
+    //     do {
+    //       result.push(qFormat(start));
+    //       start.setDate(start.getDate() + 1);
+    //     } while (start <= end)
+
+    //     return result;
+    //   }
 
 function eventDetails(id, events){
     let concert = events[id];
