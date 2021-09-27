@@ -71,7 +71,6 @@ function displayEvents(events = []) {
             //sub container for text on card
             let eventCardBody = $(`<div id="eventCardBody-${i}">`).addClass('card-body');
 
-            eventCardBody.text(events[i]._embedded.venues[0].name);
 
 
             /* Start Of eventCardBody Contents */
