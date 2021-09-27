@@ -19,15 +19,15 @@
             <div class="d-flex flex-wrap">
 
                 <!--Title-->
-                <h1 class="d-flex col-2 align-items-center text-white text-decoration-none">
+                <h1 class="col-2 align-items-center text-white text-decoration-none">
                     Live Fest
                 </h1>
 
                 <!--Space between title and search bar-->
-                <div class="d-flex col-7"></div>
+                <div class="col-6"></div>
 
                 <!-- Search Bar-->
-                <form class="d-flex col-2 col-lg-2 me-auto">
+                <form class=" col-2 col-lg-2 me-auto">
                     <input id="searchTerm" type="search" class="form-control form-control-black"
                         placeholder="Location..." aria-label="Search">
                 </form>
@@ -42,9 +42,8 @@
 
     <div class="container-fluid m-3 row">
 
-        <div class="dropdown col-4">
-            <a class="btn btn-outline-light me-2 dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div class="col-auto">
+            <a class="btn btn-outline-light mt-4 dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Genre
             </a>
             <div id="genreDropdown" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -53,30 +52,16 @@
 
         <!-- JS Loop genres -->
         </select>
-        <div id="searchDate" class="col-4 text-white">
-            <div style='margin-top: px;'>
-                <input type='text' class="form-control bg-dark text-white" id='datePicker' placeholder='MM/DD/YY'
-                    style='width: 300px;'>Start Date<br>
-                <input type='text' class="form-control bg-dark text-white" id='datePicker2' placeholder='MM/DD/YY'
-                    style='width: 300px;'>End Date
-            </div>
-
+        <div id="searchDate" class="col-auto text-white">
             <div>
-                <button type="button" class="btn btn-outline-light" onclick="searchDate()">Search</button>
+                <div class="mb-1">Start Date <input type='date' class="form-control bg-dark text-white" id='datePicker' placeholder='MM/DD/YY' style='width: 300px;'></div>
+                <div class="mt-1">End Date<input type='date' class="form-control bg-dark text-white" id='datePicker2' placeholder='MM/DD/YY' style='width: 300px;'></div>
+
             </div>
         </div>
-        <div class="dropdown col-4 justify-content-md-center">
-            <a class="btn btn-outline-light me-2 dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Price 
-        </a>
-        <div id="priceDropdown" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-    </div> 
-    </div>
+        <div class="col-auto">
+            <button type="button" class="btn btn-outline-light mt-4" onclick="searchDate()">Filter</button>
+        </div> 
     </div>
     <div class="container">
         <div class="row">
