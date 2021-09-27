@@ -3,30 +3,36 @@ const ticketMaster = `https://app.ticketmaster.com/discovery/v2/events`;
 const ticketApiKey = `JSvaCBLEbfONlapKvWM5RjNslD0khaFy`;
 const googleAPI = 'AIzaSyDm-sEZEMtTC81g89Gx0Dn7Ie2Djc_1wog';
 
-let latlong = "0,0";
-
+//prefills searchbars value based on city in local storage
+if (localStorage.getItem('city')) {
+    $("#searchTerm").val(localStorage.getItem('city'));
+}
 
 function searchCity() {
     //sets city from search term
-    const city = document.querySelector('#searchTerm').value;
+    const city = $('#searchTerm').val();
 
-
-    fetch(`${ticketMaster}?apikey=${ticketApiKey}&city=${city}&locale=*&classificationName=music`)
-        .then(function (res) {
-            console.log(res);
-            return res.json();
-        })
-        .then(function (body) {
-            console.log('body', body);
-            const events = body._embedded.events;
-            displayEvents(events);
-        })
-        .catch(function (error) {
-            console.log(error)
-        });
+    if(city){
+        fetch(`${ticketMaster}?apikey=${ticketApiKey}&city=${city}&locale=*&classificationName=music`)
+            .then(function (res) {
+                console.log(res);
+                return res.json();
+            })
+            .then(function (body) {
+                console.log('body', body);
+                const events = body._embedded.events;
+                displayEvents(events);
+            })
+            .catch(function (error) {
+                console.log(error)
+            });
+        localStorage.setItem('city', city);
+        $('#searchTerm').removeClass("alert alert-danger");
+    }
+    else {
+        $('#searchTerm').addClass("alert alert-danger");
+    }
 }
-
-
 
 function displayEvents(events = []) {
 
@@ -106,18 +112,6 @@ function displayEvents(events = []) {
         console.log('No events');
     }
 }
-    console.log(genreArray);
-    let filteredGenres = genreArray.filter((item, index) => genreArray.indexOf(item) === index)
-    console.log(filteredGenres);
-
-    let genreEl = document.querySelector("#genreDropdown");
-    for (let i = 0; i < filteredGenres.length; i++) {
-        let genreDropdownEl = document.createElement("a");
-        genreDropdownEl.textContent= filteredGenres[i]
-        genreDropdownEl.classList.add("dropdown-item");
-        genreDropdownEl.setAttribute("href", "#");
-        genreEl.append(genreDropdownEl);
-    }
 
 function eventDetails(id, events){
     let concert = events[id];
