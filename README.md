@@ -16,5 +16,5 @@ HTML/CSS using Bootstrap- Whitley
 https://doug-coder64.github.io/concert-project/
 
 <p align="center">
-  <img src="Screen Shot 2021-09-26 at 7.47.37 PM.png" width="350" title="hover text">
+  <img src="assets/images/Screen Shot 2021-09-26 at 7.47.37 PM.png" width="350" title="hover text">
 
