@@ -142,8 +142,9 @@ function searchDate() {
         // extract all date strings
         return eventDate >= startDate && eventDate <= endDate;
     });
-    console.log(resultEventData);
-    displayEvents(resultEventData);
+    if(startDate && endDate){
+        displayEvents(resultEventData);
+    }
 }
 
 
